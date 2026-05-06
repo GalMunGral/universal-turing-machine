@@ -31,11 +31,11 @@ Programs are stored in `programs/`. To run one against both implementations and 
 
 ### Purpose
 
-The 1936 paper "On Computable Numbers, with an Application to the Entscheidungsproblem" is historically significant as the work in which Turing first defined computation in precise, mechanical terms. The mathematical conventions of the paper, however, present a barrier for readers with a programming rather than logic background. This project translates Turing's construction of the Universal Turing Machine into executable code, making it accessible to readers with a programming background.
+Turing's 1936 paper "On Computable Numbers, with an Application to the Entscheidungsproblem" is the work in which computation was first defined in precise, mechanical terms. The paper's notation, rooted in mathematical logic, can be opaque to readers with a programming background. This project retranslates Turing's construction of the Universal Turing Machine into executable code, replacing mathematical notation with programming language constructs that a working programmer can read and run directly.
 
 ### Strategy
 
-The implementation is provided in two functional languages — Common Lisp and Haskell — because the m-configuration definitions in the paper rely heavily on mutual recursion and higher-order operations, which map naturally to functional style. Function names are expanded from single letters to descriptive identifiers. A number of errors in the original paper were discovered in the process.
+The implementation is provided in two functional languages — Common Lisp and Haskell — because Turing's utility functions are written in continuation-passing style: each takes its successor m-configuration as a parameter, which maps directly to first-class functions. The two languages represent different approaches: Lisp uses zero-argument closures, while Haskell uses a monadic transformer stack to thread state implicitly. Function names are expanded from single letters to descriptive identifiers. A number of errors in the original paper were discovered in the process.
 
 ## Technical Challenges
 
