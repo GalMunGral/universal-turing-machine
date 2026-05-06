@@ -1,34 +1,31 @@
 # Universal Turing Machine
 
-Turing's standard description uses the following encoding:
+Turing's standard description encodes a machine as a string using the following notation:
 
 | Notation | Meaning |
 |---|---|
-| `DA`, `DAA`, `DAAA`, … | States q1, q2, q3, … |
+| `DA`, `DAA`, … | States q1, q2, … |
 | `D` | Blank |
 | `DC`, `DCC`, … | Symbols 0, 1, … |
-| `L`, `R` | Move left, move right |
+| `L`, `R` | Move left, right |
 | `;` | Row separator |
 
-The following description table encodes a machine that computes the binary expansion of 1/15 (0.000100010001…):
+For example, this description table computes the binary expansion of 1/3 (0.010101…):
 
 ```
-EE; D A D D C R D A A ; D A A D D C R D A A A ; D A A D C D C C R D A A A ; D A A A D D C L D A A ; D A A A D C D C C C R D A .
+EE; D A D D C R D A A ; D A A D D C C R D A .
 ```
 
-Save it to a file named `tape`, then run the UTM:
+| State | Symbol | Print | Move | Next |
+|-------|--------|-------|------|------|
+| q1 | blank | 0 | R | q2 |
+| q2 | blank | 1 | R | q1 |
 
-**Haskell:**
+Programs are stored in `programs/`. To run one against both implementations and print the output as a digit string:
+
 ```bash
-runghc main.hs
+./run <program> <duration>
 ```
-
-**Lisp:**
-```bash
-sbcl --script main.lisp
-```
-
-The `tape` file is modified in place; output is appended after the description table.
 
 ## Rhetorical Design
 

@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+
+PROGRAM=${1:?usage: run <program>}
+DURATION=${2:-3}
+
+extract() {
+    sed 's/^[^.]*\.//' tape | tr ' ' '\n' | grep -xE '[01]' | tr -d '\n'
+    echo
+}
+
+echo "Lisp:"
+cp "programs/$PROGRAM" tape
+timeout -k 1 "$DURATION" sbcl --script main.lisp 2>/dev/null || true
+extract
+
+echo
+echo "Haskell:"
+cp "programs/$PROGRAM" tape
+timeout -k 1 "$DURATION" runghc main.hs 2>/dev/null || true
+extract
